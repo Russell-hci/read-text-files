@@ -1,0 +1,10 @@
+leelamove:
+e2e4
+eval:
+0.00
+line 1:
+e2e4 e7e5 g1f3 g8f6 d2d4 f6e4 f1d3 d7d5 f3e5 b8d7
+line 2:
+d2d4 g8f6 c2c4 c7c6 g1f3 d7d5
+line 3:
+g1f3 d7d5 d2d4 g8f6 c2c4 d5c4 e2e3 a7a6 f1c4

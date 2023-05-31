@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Read Text File</title>
+</head>
+
+<body>
+	<p>Move from Where: <span id="from"></span></p>
+	<p>Move to Where: <span id="to"></span></p>
+	<p>Evaluation: <span id="eval"></span></p>
+	<p>Line 1: <span id="line1"></span></p>
+	<p>Line 2: <span id="line2"></span></p>
+	<p>Line 3: <span id="line3"></span></p>
+
+	<script type="text/javascript">
+		// Define the file name and path
+		var file = "info.txt";
+
+		// Get the output elements
+		var from = document.getElementById("from");
+		var to = document.getElementById("to");
+		var eval = document.getElementById("eval");
+		var line1 = document.getElementById("line1");
+		var line2 = document.getElementById("line2");
+		var line3 = document.getElementById("line3");
+
+		// Read the file when the page loads
+		readFile(file);
+
+		function readFile(file) {
+			// Use fetch API to get the file content
+			fetch(file + "?v=" + Math.random()) // add a random query string to disable cache
+				.then(response => response.text()) // convert the response to text
+				.then(text => displayText(text)) // display the text in the output elements
+				.catch(error => console.error(error)); // handle any errors
+		}
+
+		function displayText(text) {
+			// Use regular expressions to match the keywords and values in the text file
+			var move = text.match(/leelamove:\s*(\w+)/)[1]; // get the move value
+			var evaluation = text.match(/eval:\s*(\S+)/)[1]; // get the evaluation value
+			var line1Value = text.match(/line 1:\s*(.*)/)[1]; // get the line 1 value
+			var line2Value = text.match(/line 2:\s*(.*)/)[1]; // get the line 2 value
+			var line3Value = text.match(/line 3:\s*(.*)/)[1]; // get the line 3 value
+
+			// Split the move value into two parts
+			var fromWhere = move.slice(0, 2); // get the first two characters
+			var toWhere = move.slice(2); // get the last two characters
+
+			// Display the values in the output elements
+			from.textContent = fromWhere;
+			to.textContent = toWhere;
+			eval.textContent = evaluation;
+			line1.textContent = line1Value;
+			line2.textContent = line2Value;
+			line3.textContent = line3Value;
+			
+			setTimeout(function() {
+				readFile(file); // read the file again after 1 second
+			}, 1000);
+			
+		}
+		
+	</script>
+</body>
+
+</html>
